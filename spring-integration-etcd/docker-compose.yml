@@ -1,6 +1,8 @@
 etcd:
-  image: microbox/etcd
+  image: quay.io/coreos/etcd
   ports:
-    - "4001:4001"
-    - "7001:7001"
-  command: "--name spring-cloud-cluster-etcd --data-dir=/data"
+    - "2379:2379"
+    - "2380:2380"
+  volumes:
+    - /data
+  command: "/usr/local/bin/etcd --name spring-integration-etcd --data-dir=/data"

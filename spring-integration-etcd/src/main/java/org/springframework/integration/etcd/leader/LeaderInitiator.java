@@ -42,6 +42,7 @@ import org.springframework.integration.leader.event.LeaderEventPublisher;
 import org.springframework.util.Assert;
 
 import mousio.etcd4j.EtcdClient;
+import mousio.etcd4j.responses.EtcdAuthenticationException;
 import mousio.etcd4j.responses.EtcdException;
 
 /**
@@ -69,7 +70,7 @@ public class LeaderInitiator implements Lifecycle, InitializingBean, DisposableB
 	/**
 	 * Default namespace for etcd entry.
 	 */
-	private final static String DEFAULT_NAMESPACE = "spring-cloud";
+	private final static String DEFAULT_NAMESPACE = "spring-integration";
 
 	/**
 	 * {@link EtcdClient} instance.
@@ -281,7 +282,7 @@ public class LeaderInitiator implements Lifecycle, InitializingBean, DisposableB
 		catch (EtcdException e) {
 			logger.warn("Couldn't delete candidate's entry from etcd", e);
 		}
-		catch (IOException | TimeoutException e) {
+		catch (IOException | TimeoutException | EtcdAuthenticationException e) {
 			logger.warn("Couldn't access etcd", e);
 		}
 	}
@@ -367,7 +368,7 @@ public class LeaderInitiator implements Lifecycle, InitializingBean, DisposableB
 			catch (EtcdException e) {
 				notifyRevoked();
 			}
-			catch (IOException | TimeoutException e) {
+			catch (IOException | TimeoutException | EtcdAuthenticationException e) {
 				// Couldn't access etcd, therefore, relinquish leadership
 				logger.error("Couldn't access etcd, relinquishing leadership...", e);
 				notifyRevoked();
@@ -386,7 +387,7 @@ public class LeaderInitiator implements Lifecycle, InitializingBean, DisposableB
 			catch (EtcdException e) {
 				// Couldn't set the value to current candidate's id, therefore, keep trying.
 			}
-			catch (IOException | TimeoutException e) {
+			catch (IOException | TimeoutException | EtcdAuthenticationException e) {
 				// Couldn't access etcd, therefore, keep trying.
 				logger.warn("Couldn't access etcd", e);
 			}

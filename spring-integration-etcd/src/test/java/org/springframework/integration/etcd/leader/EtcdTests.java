@@ -31,7 +31,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.integration.etcd.leader.LeaderInitiator;
 import org.springframework.integration.leader.AbstractCandidate;
 import org.springframework.integration.leader.Context;
 import org.springframework.integration.leader.DefaultCandidate;
@@ -108,7 +107,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:4001"));
+			return new EtcdClient(URI.create("http://localhost:2379"));
 		}
 
 		@Bean
@@ -140,7 +139,7 @@ public class EtcdTests {
 
 		CountDownLatch onEventLatch = new CountDownLatch(1);
 
-		ArrayList<AbstractLeaderEvent> events = new ArrayList<AbstractLeaderEvent>();
+		ArrayList<AbstractLeaderEvent> events = new ArrayList<>();
 
 		@Override
 		public void onApplicationEvent(AbstractLeaderEvent event) {
@@ -160,7 +159,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:4001"));
+			return new EtcdClient(URI.create("http://localhost:2379"));
 		}
 
 		@Bean
@@ -206,7 +205,7 @@ public class EtcdTests {
 
 		CountDownLatch onEventsLatch = new CountDownLatch(2);
 
-		ArrayList<AbstractLeaderEvent> events = new ArrayList<AbstractLeaderEvent>();
+		ArrayList<AbstractLeaderEvent> events = new ArrayList<>();
 
 		@Override
 		public void onApplicationEvent(AbstractLeaderEvent event) {
@@ -226,7 +225,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:4001"));
+			return new EtcdClient(URI.create("http://localhost:2379"));
 		}
 
 		@Bean
@@ -289,7 +288,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:4001"));
+			return new EtcdClient(URI.create("http://localhost:2379"));
 		}
 
 		@Bean
