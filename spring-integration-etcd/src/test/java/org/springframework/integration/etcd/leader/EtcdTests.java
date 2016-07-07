@@ -107,7 +107,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:2379"));
+			return new EtcdClient(URI.create("http://localhost:4001"));
 		}
 
 		@Bean
@@ -159,7 +159,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:2379"));
+			return new EtcdClient(URI.create("http://localhost:4001"));
 		}
 
 		@Bean
@@ -225,7 +225,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:2379"));
+			return new EtcdClient(URI.create("http://localhost:4001"));
 		}
 
 		@Bean
@@ -288,7 +288,7 @@ public class EtcdTests {
 
 		@Bean
 		public EtcdClient etcdInstance() {
-			return new EtcdClient(URI.create("http://localhost:2379"));
+			return new EtcdClient(URI.create("http://localhost:4001"));
 		}
 
 		@Bean
